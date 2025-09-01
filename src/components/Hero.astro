@@ -1,0 +1,28 @@
+<section class="relative">
+  <div class="relative overflow-hidden">
+    <div id="heroTrack" class="flex transition-transform duration-700">
+      <slot />
+    </div>
+    <div class="absolute inset-x-0 bottom-6 flex items-center justify-center gap-3">
+      <button class="heroDot h-2.5 w-2.5 rounded-full bg-white/70 ring-2 ring-white/40"></button>
+      <button class="heroDot h-2.5 w-2.5 rounded-full bg-white/40 ring-2 ring-white/30"></button>
+      <button class="heroDot h-2.5 w-2.5 rounded-full bg-white/40 ring-2 ring-white/30"></button>
+    </div>
+  </div>
+
+  <script>
+    const track = document.getElementById("heroTrack");
+    const dots = Array.from(document.querySelectorAll(".heroDot"));
+    let slide = 0;
+    function go(i) {
+      slide = i % 3;
+      track.style.transform = `translateX(-${slide * 100}%)`;
+      dots.forEach((d, idx) => {
+        d.classList.toggle("bg-white/70", idx === slide);
+        d.classList.toggle("bg-white/40", idx !== slide);
+      });
+    }
+    dots.forEach((d, idx) => d.addEventListener("click", () => go(idx)));
+    setInterval(() => go(slide + 1), 5000);
+  </script>
+</section>

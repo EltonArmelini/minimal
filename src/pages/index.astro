@@ -1,16 +1,38 @@
 ---
+import BaseLayout from "../layout/BaseLayout.astro";
+import Hero from "../components/Hero.astro";
+import Destinos from "../components/Destinos.astro";
+import Flota from "../components/Flota.astro";
+import Extras from "../components/Extras.astro";
 
+const destinos = [
+  { nombre: "Cataratas Argentina", categoria: "Naturaleza", cover: "/img/cataratas-arg.jpg", desc: "Circuitos Superior, Inferior y Garganta del Diablo." },
+  { nombre: "Saltos del Moconá", categoria: "Aventura", cover: "/img/mocona.jpg", desc: "Saltos longitudinales únicos en el mundo." },
+  // ... agrega todos los demás destinos
+];
+
+const extras = [
+  "Traslados privados", "Guía bilingüe", "Ticket Cataratas",
+  "Navegación Gran Aventura", "City tour Foz", "Compras CDE"
+];
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout title="Inicio - Iguazú Experiencias">
+  <Hero>
+    <!-- Podés pasarle slides como slots -->
+    <div class="min-w-full h-[56vh] md:h-[72vh] bg-cover bg-center" style="background-image: url('/img/hero1.jpg')">
+      <div class="h-full w-full bg-black/35 flex items-center">
+        <div class="max-w-xl text-white px-6">
+          <h1 class="text-4xl md:text-6xl font-bold">Viví Cataratas del Iguazú</h1>
+          <p class="mt-3">Recorré los circuitos argentino y brasileño con guías locales.</p>
+        </div>
+      </div>
+    </div>
+    <div class="min-w-full h-[56vh] md:h-[72vh] bg-cover bg-center" style="background-image: url('/img/hero2.jpg')"></div>
+    <div class="min-w-full h-[56vh] md:h-[72vh] bg-cover bg-center" style="background-image: url('/img/hero3.jpg')"></div>
+  </Hero>
+
+  <Destinos destinos={destinos} />
+  <Flota />
+  <Extras extras={extras} />
+</BaseLayout>

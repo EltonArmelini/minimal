@@ -1,0 +1,84 @@
+---
+/*
+  Componente Destinos.astro
+  - Contiene el array 'destinos'
+  - Renderiza cards con map()
+  - Usa Tailwind nativo (emerald/slate/gray)
+*/
+const destinos = [
+  { nombre: "Cataratas Argentina", categoria: "Naturaleza", cover: "/img/destinos/cataratas-arg.jpg", desc: "Circuitos Superior, Inferior y Garganta del Diablo." },
+  { nombre: "Cataratas Brasilera", categoria: "Naturaleza", cover: "/img/destinos/cataratas-br.jpg", desc: "Vistas panorámicas increíbles del lado brasileño." },
+  { nombre: "Saltos del Monday Presidente Franco", categoria: "Aventura", cover: "/img/destinos/monday.jpg", desc: "Miradores y pasarelas sobre el río Monday." },
+  { nombre: "Saltos del Moconá", categoria: "Aventura", cover: "/img/destinos/mocona.jpg", desc: "Saltos longitudinales únicos en el mundo." },
+  { nombre: "Represa Hidroeléctrica Itaipu Binacional", categoria: "Ingeniería", cover: "/img/destinos/itaipu.jpg", desc: "Una de las centrales hidroeléctricas más grandes del mundo." },
+  { nombre: "Minas de Wanda", categoria: "Cultura", cover: "/img/destinos/wanda.jpg", desc: "Piedras semipreciosas y galerías a cielo abierto." },
+  { nombre: "Ruinas de San Ignacio", categoria: "Historia", cover: "/img/destinos/san-ignacio.jpg", desc: "Misión jesuítica, patrimonio histórico." },
+  { nombre: "Yerbatera Flor del Jardín", categoria: "Gastronomía", cover: "/img/destinos/yerbatera.jpg", desc: "Proceso de la yerba mate desde la hoja al mate." },
+  { nombre: "Bar de Hielo", categoria: "Experiencia", cover: "/img/destinos/bar-hielo.jpg", desc: "Copas heladas a -10°C; abrigo incluido." },
+  { nombre: "Güira Ora", categoria: "Fauna", cover: "/img/destinos/guira-oga.jpg", desc: "Centro de rescate de animales de la selva misionera." },
+  { nombre: "Aripuca", categoria: "Cultura", cover: "/img/destinos/aripuca.jpg", desc: "Estructura gigante hecha con árboles rescatados." },
+  { nombre: "Parque das Aves", categoria: "Fauna", cover: "/img/destinos/parque-aves.jpg", desc: "Santuario de aves en Foz do Iguaçu." },
+  { nombre: "Duty Free Shop Puerto Iguazú", categoria: "Compras", cover: "/img/destinos/duty-free.jpg", desc: "Ofertas en perfumes, bebidas y más." },
+  { nombre: "Catamarán Cruceros Iguazú", categoria: "Experiencia", cover: "/img/destinos/catamaran.jpg", desc: "Paseo por el río Iguazú y Paraná." },
+  { nombre: "Excursión al Hito de las Tres Fronteras", categoria: "Cultura", cover: "/img/destinos/hito.jpg", desc: "Confluencia de Argentina, Brasil y Paraguay." },
+  { nombre: "Fly Park Iguazú", categoria: "Aventura", cover: "/img/destinos/flypark.jpg", desc: "Tirolinas y actividades al aire libre." },
+  { nombre: "Jardín de Los Colibríes", categoria: "Fauna", cover: "/img/destinos/colibries.jpg", desc: "Observación de colibríes en su hábitat." },
+  { nombre: "La Casa de Botellas", categoria: "Cultura", cover: "/img/destinos/casa-botellas.jpg", desc: "Construcción ecológica hecha con botellas." },
+  { nombre: "Feirinha Puerto Iguazú", categoria: "Gastronomía", cover: "/img/destinos/feirinha.jpg", desc: "Picadas, vinos y productos regionales." },
+  { nombre: "Yup Star: Roda Gigante de Foz do Iguaçu", categoria: "Experiencia", cover: "/img/destinos/yupstar.jpg", desc: "Rueda gigante con vistas panorámicas." },
+  { nombre: "Culturas Park Iguazú", categoria: "Cultura", cover: "/img/destinos/culturas.jpg", desc: "Recorrido por culturas originarias." },
+  { nombre: "Foz do Iguaçu", categoria: "Ciudad", cover: "/img/destinos/foz.jpg", desc: "Gastronomía y paseos urbanos." },
+  { nombre: "Ciudad del Este", categoria: "Compras", cover: "/img/destinos/cde.jpg", desc: "Centros comerciales y tecnología." },
+  { nombre: "BioCentro Iguazú", categoria: "Fauna", cover: "/img/destinos/biocentro.jpg", desc: "Mariposario y circuito educativo." },
+  { nombre: "Etc.", categoria: "Otros", cover: "/img/destinos/etc.jpg", desc: "Consultanos por más atracciones y tours privados." },
+];
+---
+<section id="destinos" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
+  <div class="flex items-end justify-between gap-6 mb-6">
+    <div>
+      <h3 class="text-2xl md:text-3xl font-extrabold text-slate-900">Destinos imperdibles</h3>
+      <p class="mt-2 text-slate-600">Elegí tu próxima experiencia por Iguazú, Foz y alrededores.</p>
+    </div>
+    <!-- Si querés, podés activar el buscador (está aquí para ser habilitado) -->
+    <div class="hidden md:block">
+      <input type="search" id="buscadorDestinos" placeholder="Buscar destino..." class="w-64 rounded-xl border border-slate-300 px-3 py-2 outline-none focus:ring-4 focus:ring-emerald-200" />
+    </div>
+  </div>
+
+  <div id="gridDestinos" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {destinos.map((d) => (
+      <article class="group rounded-2xl overflow-hidden bg-white border border-slate-200 shadow-sm hover:shadow-lg transition transform hover:scale-[1.02]">
+        <div class="h-48 w-full bg-slate-200 relative overflow-hidden">
+          <img src={d.cover} alt={d.nombre} class="h-full w-full object-cover group-hover:scale-[1.03] transition-transform duration-300" loading="lazy" />
+          <span class="absolute left-3 top-3 inline-flex items-center rounded-full bg-black/60 px-2.5 py-1 text-xs text-white">{d.categoria}</span>
+        </div>
+
+        <div class="p-4">
+          <h5 class="text-lg font-bold text-slate-900">{d.nombre}</h5>
+          <p class="mt-1 text-sm text-slate-600">{d.desc}</p>
+
+          <div class="mt-4 flex items-center justify-between">
+            <button class="text-sm font-semibold text-emerald-700 hover:underline">Ver detalle</button>
+            <button class="inline-flex items-center rounded-xl bg-emerald-600 px-3 py-1.5 text-white text-sm hover:bg-emerald-700 transition">Reservar</button>
+          </div>
+        </div>
+      </article>
+    ))}
+  </div>
+
+  <script>
+    // Opcional: buscador simple client-side (activalo si querés)
+    const input = document.getElementById('buscadorDestinos');
+    const grid = document.getElementById('gridDestinos');
+    if (input) {
+      const all = Array.from(grid.children);
+      input.addEventListener('input', (e) => {
+        const q = e.target.value.toLowerCase();
+        all.forEach(card => {
+          const title = card.querySelector('h5')?.textContent.toLowerCase() || '';
+          card.style.display = title.includes(q) ? '' : 'none';
+        });
+      });
+    }
+  </script>
+</section>
