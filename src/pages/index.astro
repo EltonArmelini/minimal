@@ -18,19 +18,7 @@ const extras = [
 ---
 
 <BaseLayout title="Inicio - Iguazú Experiencias">
-  <Hero>
-    <!-- Podés pasarle slides como slots -->
-    <div class="min-w-full h-[56vh] md:h-[72vh] bg-cover bg-center" style="background-image: url('/img/hero1.jpg')">
-      <div class="h-full w-full bg-black/35 flex items-center">
-        <div class="max-w-xl text-white px-6">
-          <h1 class="text-4xl md:text-6xl font-bold">Viví Cataratas del Iguazú</h1>
-          <p class="mt-3">Recorré los circuitos argentino y brasileño con guías locales.</p>
-        </div>
-      </div>
-    </div>
-    <div class="min-w-full h-[56vh] md:h-[72vh] bg-cover bg-center" style="background-image: url('/img/hero2.jpg')"></div>
-    <div class="min-w-full h-[56vh] md:h-[72vh] bg-cover bg-center" style="background-image: url('/img/hero3.jpg')"></div>
-  </Hero>
+  <Hero />
 
   <Destinos destinos={destinos} />
   <Flota />

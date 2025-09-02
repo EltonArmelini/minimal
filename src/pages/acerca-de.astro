@@ -1,0 +1,239 @@
+---
+import BaseLayout from "../layout/BaseLayout.astro";
+
+const estadisticas = [
+  { numero: "15+", texto: "Años de experiencia" },
+  { numero: "10K+", texto: "Visitantes satisfechos" },
+  { numero: "50+", texto: "Destinos únicos" },
+  { numero: "24/7", texto: "Atención personalizada" }
+];
+
+const valores = [
+  {
+    titulo: "Experiencia Local",
+    descripcion: "Conocemos cada rincón de Iguazú, Foz y alrededores. Nuestros guías nativos te mostrarán lugares que solo los locales conocen.",
+    icono: "🌿"
+  },
+  {
+    titulo: "Compromiso Ambiental",
+    descripcion: "Promovemos el turismo sostenible, respetando la flora y fauna de la región. Cada tour contribuye a la conservación del patrimonio natural.",
+    icono: "🌱"
+  },
+  {
+    titulo: "Atención Personalizada",
+    descripcion: "Cada viajero es único. Adaptamos nuestros servicios a tus necesidades, desde tours familiares hasta aventuras extremas.",
+    icono: "👥"
+  },
+  {
+    titulo: "Calidad Garantizada",
+    descripcion: "Trabajamos solo con los mejores proveedores de la región. Tu seguridad y satisfacción son nuestra prioridad número uno.",
+    icono: "⭐"
+  }
+];
+
+const equipo = [
+  {
+    nombre: "María González",
+    cargo: "Directora General",
+    descripcion: "15 años liderando experiencias turísticas en la región trinacional.",
+    imagen: "/img/team1.jpg"
+  },
+  {
+    nombre: "Carlos Mendoza",
+    cargo: "Guía Senior",
+    descripcion: "Especialista en naturaleza y conservación, habla 4 idiomas.",
+    imagen: "/img/team2.jpg"
+  },
+  {
+    nombre: "Ana Silva",
+    cargo: "Coordinadora de Tours",
+    descripcion: "Experta en logística y atención al cliente, garantiza cada detalle.",
+    imagen: "/img/team3.jpg"
+  }
+];
+---
+
+<BaseLayout title="Acerca de - Iguazú Experiencias">
+  
+  <!-- Hero Section -->
+  <section class="relative h-[60vh] bg-gradient-to-br from-emerald-600 to-teal-700 overflow-hidden">
+    <div class="absolute inset-0 bg-black/20"></div>
+    <div class="absolute inset-0 bg-cover bg-center opacity-30" style="background-image: url('/img/cataratas-hero.jpg')"></div>
+    
+    <div class="relative h-full flex items-center">
+      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div class="max-w-3xl text-white">
+          <h1 class="text-4xl md:text-6xl font-extrabold mb-6">
+            Nuestra Historia
+          </h1>
+          <p class="text-xl md:text-2xl font-light leading-relaxed">
+            Conectamos viajeros con la magia de las Cataratas del Iguazú desde hace más de una década, 
+            creando experiencias inolvidables en el corazón de la triple frontera.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Estadísticas -->
+  <section class="py-16 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        {estadisticas.map((stat) => (
+          <div class="text-center">
+            <div class="text-4xl md:text-5xl font-bold text-emerald-600 mb-2">{stat.numero}</div>
+            <div class="text-slate-600 font-medium">{stat.texto}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Historia -->
+  <section class="py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6">
+            Una Pasión Convertida en Experiencia
+          </h2>
+          <div class="prose prose-lg text-slate-600 space-y-6">
+            <p>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fundada en 2008 por un grupo de apasionados 
+              por el turismo local, nuestra empresa nació del deseo de mostrar la verdadera esencia de Iguazú a 
+              visitantes de todo el mundo.
+            </p>
+            <p>
+              Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Comenzamos con un pequeño equipo 
+              de guías locales que conocían cada sendero, cada cascada secreta y cada historia que las piedras 
+              milenarias tenían para contar.
+            </p>
+            <p>
+              Ut enim ad minim veniam, quis nostrud exercitation. Hoy somos líderes en turismo receptivo de la 
+              región, pero mantenemos el mismo espíritu familiar y la pasión por crear momentos únicos que nos 
+              caracterizan desde el primer día.
+            </p>
+          </div>
+        </div>
+        <div class="relative">
+          <img 
+            src="/img/historia-empresa.jpg" 
+            alt="Historia de la empresa" 
+            class="rounded-2xl shadow-2xl w-full h-96 object-cover"
+          />
+          <div class="absolute -bottom-6 -left-6 bg-emerald-600 text-white p-6 rounded-xl shadow-lg">
+            <div class="text-2xl font-bold">2008</div>
+            <div class="text-sm">Año de fundación</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Valores -->
+  <section class="py-20 bg-white">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">
+          Nuestros Valores
+        </h2>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Los principios que guían cada una de 
+          nuestras experiencias y nos conectan con la maravilla natural de Iguazú.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        {valores.map((valor) => (
+          <div class="bg-slate-50 rounded-2xl p-8 hover:shadow-lg transition-shadow">
+            <div class="text-4xl mb-4">{valor.icono}</div>
+            <h3 class="text-2xl font-bold text-slate-900 mb-4">{valor.titulo}</h3>
+            <p class="text-slate-600 leading-relaxed">{valor.descripcion}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Equipo -->
+  <section class="py-20 bg-slate-50">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-4">
+          Nuestro Equipo
+        </h2>
+        <p class="text-xl text-slate-600 max-w-3xl mx-auto">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Profesionales apasionados que 
+          hacen posible cada experiencia única en la región de Iguazú.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        {equipo.map((miembro) => (
+          <div class="bg-white rounded-2xl p-6 text-center shadow-sm hover:shadow-lg transition-shadow">
+            <img 
+              src={miembro.imagen} 
+              alt={miembro.nombre}
+              class="w-24 h-24 rounded-full mx-auto mb-4 object-cover"
+            />
+            <h3 class="text-xl font-bold text-slate-900 mb-2">{miembro.nombre}</h3>
+            <div class="text-emerald-600 font-semibold mb-3">{miembro.cargo}</div>
+            <p class="text-slate-600 text-sm leading-relaxed">{miembro.descripcion}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Misión y Visión -->
+  <section class="py-20 bg-gradient-to-r from-emerald-600 to-teal-600">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="grid lg:grid-cols-2 gap-12">
+        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-white">
+          <h3 class="text-2xl font-bold mb-6">🎯 Nuestra Misión</h3>
+          <p class="text-lg leading-relaxed">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Conectar a viajeros de todo el mundo 
+            con la magia natural de las Cataratas del Iguazú, ofreciendo experiencias auténticas, 
+            sostenibles y seguras que generen recuerdos para toda la vida.
+          </p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 text-white">
+          <h3 class="text-2xl font-bold mb-6">👁️ Nuestra Visión</h3>
+          <p class="text-lg leading-relaxed">
+            Sed do eiusmod tempor incididunt ut labore. Ser reconocidos como la empresa líder en turismo 
+            receptivo de la región trinacional, promoviendo el desarrollo sostenible y la conservación 
+            del patrimonio natural y cultural de Iguazú.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Call to Action -->
+  <section class="py-20 bg-white">
+    <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <h2 class="text-3xl md:text-4xl font-extrabold text-slate-900 mb-6">
+        ¿Listos para Vivir Iguazú?
+      </h2>
+      <p class="text-xl text-slate-600 mb-8 max-w-2xl mx-auto">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Dejanos ser parte de tu próxima 
+        aventura y descubrí por qué somos la elección preferida de miles de viajeros.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a 
+          href="/contacto" 
+          class="inline-flex items-center justify-center px-8 py-4 bg-emerald-600 text-white font-semibold rounded-xl hover:bg-emerald-700 transition"
+        >
+          Contactanos Ahora
+        </a>
+        <a 
+          href="/tours" 
+          class="inline-flex items-center justify-center px-8 py-4 border-2 border-emerald-600 text-emerald-600 font-semibold rounded-xl hover:bg-emerald-50 transition"
+        >
+          Ver Nuestros Tours
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

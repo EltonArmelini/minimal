@@ -1,31 +1,104 @@
 ---
 /*
-  Componente Flota.astro con su propio array y map()
+  Componente Flota.astro con vehículos típicos de Argentina
   Ubica fotos en: public/img/flota/<archivo>.jpg
 */
 const flota = [
-  { modelo: "Toyota Corolla", tipo: "Sedán", cover: "/img/flota/corolla.jpg", desc: "Cómodo y seguro para viajes familiares." },
-  { modelo: "Hilux 4x4", tipo: "Pickup", cover: "/img/flota/hilux.jpg", desc: "Ideal para excursiones y terreno difícil." },
-  { modelo: "Mercedes Sprinter", tipo: "Van", cover: "/img/flota/sprinter.jpg", desc: "Capacidad hasta 15 pasajeros con aire acondicionado." },
+  { modelo: "Volkswagen Vento", tipo: "Sedán", cover: "/public/images/auto-01.png", desc: "Confort y economía para traslados urbanos." },
+  { modelo: "Ford EcoSport", tipo: "SUV Compacta", cover: "/public/images/auto-01.png", desc: "Versatilidad y altura para caminos rurales." },
+  { modelo: "Renault Duster", tipo: "SUV", cover: "/public/images/auto-01.png", desc: "Robusta y confiable para todo tipo de terreno." },
+  { modelo: "Chevrolet Cruze", tipo: "Sedán", cover: "/public/images/auto-01.png", desc: "Espacioso y cómodo para viajes largos." },
+  { modelo: "Honda HR-V", tipo: "SUV Compacta", cover: "/public/images/auto-01.png", desc: "Moderna tecnología y comodidad premium." },
+  { modelo: "Volkswagen Amarok", tipo: "Pickup", cover: "/public/images/auto-01.png", desc: "Ideal para aventuras off-road y cargas pesadas." }
 ];
 ---
-<section id="flota" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 bg-slate-50">
-  <div class="flex items-center justify-between mb-6">
-    <h3 class="text-2xl font-extrabold text-slate-900">Nuestra Flota</h3>
-    <p class="text-sm text-slate-600">Vehículos disponibles para traslados y excursiones.</p>
+<section id="flota" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12 bg-secondary/30">
+  <div class="flex items-end justify-between gap-6 mb-6">
+    <div>
+      <h3 class="text-2xl md:text-3xl font-extrabold text-primary">Nuestra Flota</h3>
+      <p class="mt-2 text-primary/70">Vehículos modernos y seguros para todos tus traslados.</p>
+    </div>
+    <div class="hidden md:block text-right">
+      <p class="text-sm text-primary/60">Todos con aire acondicionado</p>
+      <p class="text-sm text-primary/60">y seguro integral</p>
+    </div>
   </div>
 
-  <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-    {flota.map((v) => (
-      <article class="rounded-2xl overflow-hidden bg-white border border-slate-200 shadow-sm hover:shadow-lg transition transform hover:scale-[1.02]">
-        <div class="h-44 w-full bg-slate-200 overflow-hidden">
-          <img src={v.cover} alt={v.modelo} class="h-full w-full object-cover" loading="lazy" />
+  <div id="flotaGrid" class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+    {flota.map((v, index) => (
+      <article class={`flota-card group rounded-2xl overflow-hidden bg-white border border-beige/30 shadow-sm hover:shadow-xl transition-all duration-300 transform hover:scale-[1.02] ${index >= 3 ? 'hidden' : ''}`}>
+        <div class="h-50 w-full bg-lightAccent overflow-hidden relative">
+          <img src={v.cover} alt={v.modelo} class="h-full w-full object-contain group-hover:scale-105 transition-transform duration-300" loading="lazy" />
+          <div class="absolute top-3 right-3">
+            <span class="inline-flex items-center px-2.5 py-1 rounded-full text-xs font-medium bg-accent/90 text-primary backdrop-blur-sm">
+              {v.tipo}
+            </span>
+          </div>
         </div>
-        <div class="p-4">
-          <h4 class="text-lg font-bold text-slate-900">{v.modelo}</h4>
-          <p class="text-sm text-slate-600">{v.tipo} — {v.desc}</p>
+        <div class="p-5">
+          <h4 class="text-xl font-bold text-primary mb-2">{v.modelo}</h4>
+          <p class="text-sm text-primary/70 leading-relaxed">{v.desc}</p>
+          
+          <div class="mt-4 flex items-center justify-between">
+            <div class="flex items-center gap-4 text-xs text-primary/60">
+              <span class="flex items-center gap-1">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M16.707 10.293a1 1 0 010 1.414l-6 6a1 1 0 01-1.414 0l-6-6a1 1 0 111.414-1.414L9 14.586V3a1 1 0 012 0v11.586l4.293-4.293a1 1 0 011.414 0z" clip-rule="evenodd"></path>
+                </svg>
+                A/C
+              </span>
+              <span class="flex items-center gap-1">
+                <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 20 20">
+                  <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path>
+                </svg>
+                Seguro
+              </span>
+            </div>
+            <button class="text-sm font-semibold text-accent hover:text-darkAccent transition-colors">
+              Consultar
+            </button>
+          </div>
         </div>
       </article>
     ))}
   </div>
+
+  <!-- Botón Ver Más -->
+  <div id="verMasFlotaBtn" class="text-center mt-8">
+    <button 
+      class="px-6 py-3 bg-accent text-primary rounded-xl hover:bg-darkAccent hover:text-secondary transition-all duration-200 font-semibold"
+      onclick="mostrarMasFlota()"
+    >
+      Ver más vehículos (3 restantes)
+    </button>
+  </div>
+
+  <script>
+    let flotaVisible = 3;
+    const totalFlota = 6;
+
+    function mostrarMasFlota() {
+      const cards = document.querySelectorAll('.flota-card');
+      const btn = document.getElementById('verMasFlotaBtn');
+      
+      // Mostrar las siguientes 3 cards
+      for (let i = flotaVisible; i < Math.min(flotaVisible + 3, totalFlota); i++) {
+        cards[i].classList.remove('hidden');
+      }
+      
+      flotaVisible += 3;
+      
+      // Ocultar botón si ya se mostraron todas
+      if (flotaVisible >= totalFlota) {
+        btn.style.display = 'none';
+      } else {
+        // Actualizar el texto del botón
+        const restantes = totalFlota - flotaVisible;
+        btn.querySelector('button').textContent = `Ver más vehículos (${restantes} restantes)`;
+      }
+    }
+
+    // Hacer la función global
+    window.mostrarMasFlota = mostrarMasFlota;
+  </script>
 </section>
