@@ -30,17 +30,33 @@ const destinos = [
   { nombre: "Culturas Park Iguazú", pais: "Argentina", cover: " images/culturas-park.jpg", desc: "Recorrido por culturas originarias." },
   { nombre: "Foz do Iguaçu", pais: "Brasil", cover: " images/foz-de-iguazu-brasil.webp", desc: "Gastronomía y paseos urbanos." },
   { nombre: "Ciudad del Este", pais: "Paraguay", cover: " images/ciudad-del-este.jpg", desc: "Centros comerciales y tecnología." },
-  { nombre: "BioCentro Iguazú", pais: "Argentina", cover: " images/biocentro.jpg", desc: "Mariposario y circuito educativo." }];
+  { nombre: "BioCentro Iguazú", pais: "Argentina", cover: " images/biocentro.jpg", desc: "Mariposario y circuito educativo." }
+];
 ---
 
 <section id="destinos" class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-12">
-  <div class="flex items-end justify-between gap-6 mb-6">
-    <div>
-      <h3 class="text-2xl md:text-3xl font-extrabold text-slate-900">Destinos imperdibles</h3>
-      <p class="mt-2 text-slate-600">Elegí tu próxima experiencia por Iguazú, Foz y alrededores.</p>
+  <!-- Header Section - Responsive -->
+  <div class="mb-6">
+    <!-- Mobile: Stack vertically and center -->
+    <div class="md:hidden text-center space-y-4">
+      <div>
+        <h3 class="text-2xl font-extrabold text-slate-900">Destinos imperdibles</h3>
+        <p class="mt-2 text-slate-600">Elegí tu próxima experiencia por Iguazú, Foz y alrededores.</p>
+      </div>
+      <div>
+        <input type="search" id="buscadorDestinos" placeholder="Buscar destino..." class="w-full max-w-sm rounded-xl border border-slate-300 px-3 py-2 outline-none focus:ring-4 focus:ring-emerald-200" />
+      </div>
     </div>
-    <div class="hidden md:block">
-      <input type="search" id="buscadorDestinos" placeholder="Buscar destino..." class="w-64 rounded-xl border border-slate-300 px-3 py-2 outline-none focus:ring-4 focus:ring-emerald-200" />
+    
+    <!-- Desktop: Original layout -->
+    <div class="hidden md:flex items-end justify-between gap-6">
+      <div>
+        <h3 class="text-2xl md:text-3xl font-extrabold text-slate-900">Destinos imperdibles</h3>
+        <p class="mt-2 text-slate-600">Elegí tu próxima experiencia por Iguazú, Foz y alrededores.</p>
+      </div>
+      <div>
+        <input type="search" id="buscadorDestinosDesktop" placeholder="Buscar destino..." class="w-64 rounded-xl border border-slate-300 px-3 py-2 outline-none focus:ring-4 focus:ring-emerald-200" />
+      </div>
     </div>
   </div>
 
@@ -54,7 +70,7 @@ const destinos = [
           <img 
             src={flagMap[d.pais] || flagMap["Otros"]} 
             alt={d.pais} 
-            class="absolute left-3 top-3 h-8 w-10 object-fit aspect-square  shadow" 
+            class="absolute left-3 top-3 h-8 w-10 object-fit aspect-square shadow" 
           />
 
         </div>
@@ -209,13 +225,25 @@ const destinos = [
       // Inicializar vista
       inicializarVista();
       
-      // Configurar buscador
-      const input = document.getElementById('buscadorDestinos');
-      if (input) {
-        input.addEventListener('input', (e) => {
-          destinosVisible = 6; // Resetear límite en cada búsqueda
-          buscarDestinos(e.target.value);
-        });
+      // Configurar ambos buscadores (mobile y desktop)
+      const inputMobile = document.getElementById('buscadorDestinos');
+      const inputDesktop = document.getElementById('buscadorDestinosDesktop');
+      
+      function handleSearch(e) {
+        destinosVisible = 6; // Resetear límite en cada búsqueda
+        buscarDestinos(e.target.value);
+        
+        // Sincronizar el otro input
+        const otherInput = e.target.id === 'buscadorDestinos' ? inputDesktop : inputMobile;
+        if (otherInput) otherInput.value = e.target.value;
+      }
+      
+      if (inputMobile) {
+        inputMobile.addEventListener('input', handleSearch);
+      }
+      
+      if (inputDesktop) {
+        inputDesktop.addEventListener('input', handleSearch);
       }
     });
   </script>
