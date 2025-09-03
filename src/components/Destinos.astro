@@ -1,4 +1,7 @@
 ---
+// Importar el componente del popup
+import PopUpDestino from './PopUpDestino.astro';
+
 const flagMap = {
   Argentina: "images/Flag_of_Argentina.svg.webp",
   Brasil: "images/Flag_of_Brazil.svg.webp",
@@ -16,7 +19,7 @@ const destinos = [
   { nombre: "Ruinas de San Ignacio", pais: "Argentina", cover: " images/san-ignacio.jpg", desc: "Misión jesuítica, patrimonio histórico." },
   { nombre: "Yerbatera Flor del Jardín", pais: "Argentina", cover: " images/Flor-de-Jardin.jpg", desc: "Proceso de la yerba mate desde la hoja al mate." },
   { nombre: "Bar de Hielo", pais: "Argentina", cover: " images/icebar-iguazu.jpg", desc: "Copas heladas a -10°C; abrigo incluido." },
-  { nombre: "Güira Ora", pais: "Paraguay", cover: " images/guira-oga-iguazu.jpg", desc: "Centro de rescate de animales de la selva misionera." },
+  { nombre: "Güira Ora", pais: "Argentina", cover: " images/guira-oga-iguazu.jpg", desc: "Centro de rescate de animales de la selva misionera." },
   { nombre: "Aripuca", pais: "Argentina", cover: " images/la-aripuca.jpg", desc: "Estructura gigante hecha con árboles rescatados." },
   { nombre: "Parque das Aves", pais: "Brasil", cover: " images/parque-das-aves-br.jpg", desc: "Santuario de aves en Foz do Iguaçu." },
   { nombre: "Duty Free Shop Puerto Iguazú", pais: "Argentina", cover: " images/duty-free-shop-puerto.jpg", desc: "Ofertas en perfumes, bebidas y más." },
@@ -88,7 +91,10 @@ const destinos = [
     ))}
   </div>
 
-  <script>
+  <!-- Incluir el componente del popup -->
+  <PopUpDestino />
+
+  <script define:vars={{ destinos, flagMap }}>
     // Variables para controlar cuántos mostrar
     let destinosVisible = 6;
     const incremento = 6;
@@ -130,8 +136,17 @@ const destinos = [
             const desc = card.querySelector('p')?.textContent || '';
             const paisImg = card.querySelector('img[alt]:not([alt="' + nombre + '"])');
             const pais = paisImg ? paisImg.alt : '';
+            const cover = card.querySelector('img[alt="' + nombre + '"]')?.src || '';
             
-            verDetalle(nombre, desc, pais);
+            // Encontrar el destino completo
+            const destino = destinos.find(d => d.nombre === nombre);
+            if (destino) {
+              const destinoCompleto = {
+                ...destino,
+                bandera: flagMap[destino.pais] || flagMap["Otros"]
+              };
+              verDetalle(destinoCompleto);
+            }
           });
         }
       });
@@ -180,9 +195,15 @@ const destinos = [
       mostrarBotonVerMas();
     }
 
-    // Función para ver detalle
-    function verDetalle(nombre, desc, pais) {
-      alert(`Detalle de: ${nombre}\n\nDescripción: ${desc}\nPaís: ${pais}`);
+    // Función modificada para ver detalle - ahora abre el popup
+    function verDetalle(destino) {
+      // Verificar si la función global existe
+      if (window.abrirPopup) {
+        window.abrirPopup(destino);
+      } else {
+        // Fallback al alert si hay algún problema
+        alert(`Detalle de: ${destino.nombre}\n\nDescripción: ${destino.desc}\nPaís: ${destino.pais}`);
+      }
     }
 
     // Función modificada para el buscador que respeta el límite
